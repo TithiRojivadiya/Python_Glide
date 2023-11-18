@@ -1,5 +1,8 @@
 import pygame
 import random
+import os
+
+pygame.mixer.init()
 
 pygame.init()
 
@@ -30,6 +33,9 @@ def plot_snake(gameWindow, color, snk_list, snake_size):
 def welcome():              #Welcome screen
     exit_game = False
     while not exit_game :
+        pygame.mixer.music.load('nagin.mp3')
+        pygame.mixer.music.play()
+
         gameWindow.fill((130,99,150))#purple color
         text_screen("Welcome to Snakes" ,black,250,250)
         text_screen("Press Space Bar to Play" ,black,220,300)
@@ -62,8 +68,16 @@ def gameloop() :
     food_x = random.randint(20,screen_width/2)
     food_y = random.randint(20,screen_height/2)
 
+    pygame.mixer.music.load('nagin.mp3')
+    pygame.mixer.music.play(-1)
+
+    if (not os.path.exists ("highscore.txt")):
+        with open("highscore.txt",'w') as f:
+            f.write("0")
+
     with open("highscore.txt",'r') as f:
         highscore = f.read()
+
     while not exit_game:
 
         if game_over :
@@ -133,13 +147,20 @@ def gameloop() :
             if len(snk_list)>snk_length:
                 del snk_list[0]
 
-            if head in snk_list[:-1]:
+            if head in snk_list[:-1]:       #game over if snake touch at the wall
+                pygame.mixer.music.stop()
+                pygame.mixer.music.load('ohnoc.mp3')
+                pygame.mixer.music.play()
                 game_over = True
 
-            if snake_x<0 or snake_x>screen_width or snake_y<0 or snake_y>screen_height:
+            if snake_x<0 or snake_x>screen_width or snake_y<0 or snake_y>screen_height: #game over if snake touch it self
+                pygame.mixer.music.stop()
+                pygame.mixer.music.load('ohnoc.mp3')
+                pygame.mixer.music.play()
                 game_over=True
 
             plot_snake(gameWindow, black, snk_list, snake_size)
+
         pygame.display.update()
         clock.tick(fps)
 
@@ -147,4 +168,3 @@ def gameloop() :
     quit()
 
 welcome()
-# gameloop()
