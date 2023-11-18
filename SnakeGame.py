@@ -16,6 +16,17 @@ screen_width = 900
 screen_height = 600
 gameWindow = pygame.display.set_mode((screen_width, screen_height))
 
+#background images
+#playing game
+bgimg = pygame.image.load("bg.jpg")
+bgimg = pygame.transform.scale(bgimg, (screen_width, screen_height)).convert_alpha()
+#starting
+bgimg2 = pygame.image.load("Snake_Game_starting.jpg")
+bgimg2 = pygame.transform.scale(bgimg2, (screen_width, screen_height)).convert_alpha()
+#game over
+bgimg3 = pygame.image.load("gameo.jpg")
+bgimg3 = pygame.transform.scale(bgimg3, (screen_width, screen_height)).convert_alpha()
+
 #game title 
 pygame.display.set_caption("SnakeGameWithKeira")
 pygame.display.update()
@@ -37,6 +48,7 @@ def welcome():              #Welcome screen
         pygame.mixer.music.play()
 
         gameWindow.fill((130,99,150))#purple color
+        gameWindow.blit(bgimg2,(0,0))
         text_screen("Welcome to Snakes" ,black,250,250)
         text_screen("Press Space Bar to Play" ,black,220,300)
         for event in pygame.event.get() :
@@ -84,6 +96,7 @@ def gameloop() :
             with open("highscore.txt",'w') as f:
                 f.write(str(highscore))
             gameWindow.fill(white)
+            gameWindow.blit(bgimg3,(0,0))
             text_screen("Game Over ! Please Enter to Continue",red,100,250)
 
             for event in pygame.event.get() :
@@ -136,6 +149,7 @@ def gameloop() :
                         highscore = score
 
             gameWindow.fill(white)
+            gameWindow.blit(bgimg,(0,0))
             text_screen("Score : " + str(score) + " Highscore : "+str(highscore),red,5,5)
             pygame.draw.rect(gameWindow, red, [food_x, food_y, snake_size, snake_size])
 
