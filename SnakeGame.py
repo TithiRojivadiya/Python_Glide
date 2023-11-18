@@ -16,9 +16,6 @@ gameWindow = pygame.display.set_mode((screen_width, screen_height))
 #game title 
 pygame.display.set_caption("SnakeGameWithKeira")
 pygame.display.update()
-
-#game variable
-
 clock = pygame.time.Clock()
 font = pygame.font.SysFont(None, 55)
 
@@ -49,9 +46,14 @@ def gameloop() :
 
     food_x = random.randint(20,screen_width/2)
     food_y = random.randint(20,screen_height/2)
+
+    with open("highscore.txt",'r') as f:
+        highscore = f.read()
     while not exit_game:
 
         if game_over :
+            with open("highscore.txt",'w') as f:
+                f.write(str(highscore))
             gameWindow.fill(white)
             text_screen("Game Over ! Please Enter to Continue",red,100,250)
 
@@ -92,14 +94,17 @@ def gameloop() :
             snake_y += velocity_y
 
             if abs(snake_x - food_x)<9 and abs(snake_y-food_y)<9:
-                score+=1
-                print("Score : ",score*10)
+                score+=10
+                print("Score : ",score)
                 food_x = random.randint(20,screen_width/2)
                 food_y = random.randint(20,screen_height/2)
                 snk_length += 5
 
+                if score>int(highscore) :
+                        highscore = score
+
             gameWindow.fill(white)
-            text_screen("Score : " + str(score*10),red,5,5)
+            text_screen("Score : " + str(score) + " Highscore : "+str(highscore),red,5,5)
             pygame.draw.rect(gameWindow, red, [food_x, food_y, snake_size, snake_size])
 
             head = []
