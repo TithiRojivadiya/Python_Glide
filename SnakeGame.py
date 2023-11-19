@@ -2,7 +2,7 @@ import pygame
 import random
 import os
 
-pygame.mixer.init()
+pygame.mixer.init()     #for add music 
 
 pygame.init()
 
@@ -79,7 +79,7 @@ def gameloop() :
     snake_size = 25
     fps = 60
     velocity_x = 0
-    velocity_y = 0
+    velocity_y = 0 
     init_velocity = 5
     snk_list = []
     snk_length = 1
