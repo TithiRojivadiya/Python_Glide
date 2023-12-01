@@ -28,7 +28,7 @@ bgimg3 = pygame.image.load("gameo.jpg")
 bgimg3 = pygame.transform.scale(bgimg3, (screen_width, screen_height)).convert_alpha()
 
 #game title 
-pygame.display.set_caption("SnakeGameWithKeira")
+pygame.display.set_caption("SnakeGameWithTithi")
 pygame.display.update()
 clock = pygame.time.Clock()
 # font = pygame.font.SysFont(None, 55)
@@ -71,7 +71,7 @@ def welcome():              #Welcome screen
         clock.tick(60)
 
 #game loop
-def gameloop() :
+def gameloop() : 
     exit_game = False
     game_over = False
     snake_x = 45
