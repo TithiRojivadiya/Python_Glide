@@ -18,7 +18,7 @@ gameWindow = pygame.display.set_mode((screen_width, screen_height))
 
 #background images
 #playing game
-bgimg = pygame.image.load("bg.jpg")
+bgimg = pygame.image.load('bg.jpg')
 bgimg = pygame.transform.scale(bgimg, (screen_width, screen_height)).convert_alpha()
 #starting
 bgimg2 = pygame.image.load("Snake_Game_starting.jpg")
